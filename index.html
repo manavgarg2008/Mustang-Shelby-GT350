@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mustang Shelby GT350 - Interactive Experience</title>
+    <meta name="description" content="Experience the raw power and precision of the Mustang Shelby GT350 through an interactive scroll-driven showcase.">
+    
+    <!-- Tailwind CSS with custom configuration -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "tertiary": "#c8c6c5",
+                        "tertiary-container": "#535252",
+                        "surface-tint": "#a6c8ff",
+                        "on-tertiary-container": "#c8c5c5",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-bright": "#3a3939",
+                        "primary-fixed": "#d5e3ff",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "error": "#ffb4ab",
+                        "on-surface-variant": "#c2c6d3",
+                        "surface": "#131313",
+                        "on-background": "#e5e2e1",
+                        "outline-variant": "#424751",
+                        "on-surface": "#e5e2e1",
+                        "background": "#131313",
+                        "primary-container": "#00529b",
+                        "secondary-fixed": "#e2e2e2",
+                        "surface-dim": "#131313",
+                        "tertiary-fixed": "#e5e2e1",
+                        "inverse-primary": "#1d5fa8",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "surface-container": "#201f1f",
+                        "on-secondary-container": "#b4b5b5",
+                        "on-primary": "#003060",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "on-primary-container": "#a5c7ff",
+                        "on-tertiary": "#313030",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-container-high": "#2a2a2a",
+                        "inverse-on-surface": "#313030",
+                        "primary": "#a6c8ff",
+                        "surface-container-highest": "#353534",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "on-secondary-fixed-variant": "#454747",
+                        "primary-fixed-dim": "#a6c8ff",
+                        "on-secondary": "#2f3131",
+                        "surface-variant": "#353534",
+                        "outline": "#8c919c",
+                        "secondary-container": "#454747",
+                        "secondary": "#c6c6c7",
+                        "on-primary-fixed": "#001c3b",
+                        "on-primary-fixed-variant": "#004787"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "section-gap": "120px",
+                        "margin-mobile": "20px",
+                        "unit": "8px",
+                        "container-max": "1440px",
+                        "margin-desktop": "80px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "title-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "700"}],
+                        "display-lg": ["72px", {"lineHeight": "80px", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "title-md": ["24px", {"lineHeight": "32px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&family=Syncopate:wght@400;700&family=Hanken+Grotesk:wght@400;600;700;800&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Preloader Overlay -->
+    <div id="preloader" class="preloader-overlay">
+        <div class="preloader-content">
+            <h2 class="preloader-brand">MUSTANG</h2>
+            <div class="loading-bar-container">
+                <div class="loading-bar" id="loading-bar"></div>
+            </div>
+            <div class="preloader-status">
+                <span class="loading-text">PRELOADING SYSTEM ASSETS</span>
+                <span class="loading-percentage" id="loading-percentage">0%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="main-header">
+        <div class="logo">
+            <a href="#" id="header-logo">SHELBY <span class="accent">GT350</span></a>
+        </div>
+        <nav class="nav-links">
+            <a href="#hero-section" class="nav-link">Overview</a>
+            <a href="#heritage-section" class="nav-link">Heritage</a>
+            <a href="#down-section" class="nav-link">Aerodynamics</a>
+            <a href="#track-section" class="nav-link">Performance</a>
+        </nav>
+        <div class="cta">
+            <a href="#heritage-section" class="cta-button" id="cta-reserve">EXPLORE SHELBY</a>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+
+        <!-- Hero Section (Scroll Pinning & Canvas Animation) -->
+        <section id="hero-section" class="scroll-section">
+            <div class="sticky-container">
+                <canvas id="hero-canvas"></canvas>
+                
+                <!-- Text Overlays mapping to scroll checkpoints -->
+                <div class="text-overlays">
+                    <div id="hero-text-1" class="text-overlay">
+                        <span class="category">UNLEASH THE BEAST</span>
+                        <h1>CRAFTED FOR THE BOLD</h1>
+                        <p>The legendary muscle car, re-imagined for modern adrenaline seekers. Precision meets heritage.</p>
+                    </div>
+                    
+                    <div id="hero-text-2" class="text-overlay">
+                        <span class="category">AERODYNAMIC PROFILE</span>
+                        <h1>SCULPTED BY WIND</h1>
+                        <p>Every curve, vent, and line is designed to harness the airflow, increasing downforce and cooling efficiency.</p>
+                    </div>
+
+                    <div id="hero-text-3" class="text-overlay">
+                        <span class="category">AGGRESSIVE RESPONSE</span>
+                        <h1>READY FOR FLIGHT</h1>
+                        <p>An uncompromising stance designed to command attention on the highway and dominate the track.</p>
+                    </div>
+                </div>
+
+                <!-- Scroll Down Indicator -->
+                <div class="scroll-indicator" id="scroll-indicator">
+                    <span class="scroll-label">SCROLL TO UNVEIL</span>
+                    <div class="mouse-icon">
+                        <div class="wheel"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Heritage Content Section -->
+        <section id="heritage-section" class="relative z-40 py-section-gap bg-background px-margin-mobile md:px-margin-desktop">
+            <div class="max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+                <div class="lg:col-span-5 space-y-8">
+                    <h2 class="font-display-lg text-headline-lg text-on-surface leading-tight">
+                        Heritage Meets <br/><span class="text-primary">High-Performance</span>
+                    </h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                        Every curve of the GT350 is sculpted by airflow. Every detail serves a singular purpose: to connect the driver to the machine with visceral feedback and uncompromising speed.
+                    </p>
+                    <div class="flex gap-12 pt-4">
+                        <div>
+                            <span class="block font-display-lg text-title-md text-primary">526</span>
+                            <span class="block font-label-caps text-[10px] uppercase text-on-surface-variant">Horsepower</span>
+                        </div>
+                        <div>
+                            <span class="block font-display-lg text-title-md text-primary">8250</span>
+                            <span class="block font-label-caps text-[10px] uppercase text-on-surface-variant">RPM Redline</span>
+                        </div>
+                        <div>
+                            <span class="block font-display-lg text-title-md text-primary">1.1</span>
+                            <span class="block font-label-caps text-[10px] uppercase text-on-surface-variant">Lateral G</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-7 relative group">
+                    <div class="glass-layer rounded-xl overflow-hidden aspect-[1.6]">
+                        <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A cinematic close-up of Shelby GT350" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAvsLMNYQaLO92pAzfOCS6sOHDpe-Xc-lrAooV5DR_KrcO4zmJmHAw7mywu8p4iYLhkSn9Jm9-xEfHDXtg4V9lQuY7GrwDlZm6e_JJ5ircQ3Mk7UWNYdf8_HGZ-IfKb3hF0E1N0HnB1MASt55joqb2hasFJKw0TvkPX1npEpLayFpPwKAb_3MEhoTl4PZSo4ZXM2pJdtnOJyts4fwi6gfwrK-S51lPFPXBeRvYt2y42WzK376wG3utdjoD5tMT25Ns"/>
+                    </div>
+                    <!-- Interactive Glow -->
+                    <div class="absolute -inset-4 bg-primary/10 blur-3xl rounded-full -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Down Section (Scroll Pinning & Canvas Animation) -->
+        <section id="down-section" class="scroll-section">
+            <div class="sticky-container">
+                <canvas id="down-canvas"></canvas>
+
+                <!-- Interactive Component Menu -->
+                <div class="component-showcase-menu">
+                    <div class="menu-header">COMPONENT SHOWCASE</div>
+                    <ul class="menu-list">
+                        <li class="menu-item active" data-target-frame="0">
+                            <span class="bullet"></span>
+                            <span class="label">OVERVIEW</span>
+                        </li>
+                        <li class="menu-item" data-target-frame="70">
+                            <span class="bullet"></span>
+                            <span class="label">COMPONENT SCHEMATIC</span>
+                        </li>
+                        <li class="menu-item" data-target-frame="150">
+                            <span class="bullet"></span>
+                            <span class="label">EXPLODED PANEL VIEW</span>
+                        </li>
+                        <li class="menu-item" data-target-frame="200">
+                            <span class="bullet"></span>
+                            <span class="label">BODY REASSEMBLY</span>
+                        </li>
+                        <li class="menu-item" data-target-frame="250">
+                            <span class="bullet"></span>
+                            <span class="label">SKELETON CHASSIS</span>
+                        </li>
+                        <li class="menu-item" data-target-frame="299">
+                            <span class="bullet"></span>
+                            <span class="label">ENGINE & SUSPENSION</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Floating Spec Card Overlay -->
+                <div class="component-spec-card" id="spec-card">
+                    <div class="spec-card-content">
+                        <span class="spec-category" id="spec-category">CARBON AERO</span>
+                        <h2 class="spec-title" id="spec-title">REFINED DOWNFORCE</h2>
+                        <p class="spec-description" id="spec-description">Aggressive front splitters and a performance rear spoiler work in unison to glue the chassis to the tarmac at speed.</p>
+                        <div class="spec-divider"></div>
+                        <ul class="spec-list" id="spec-list">
+                            <li><span class="spec-label">Drag Coefficient:</span> <span class="spec-value">0.38 Cd</span></li>
+                            <li><span class="spec-label">Curb Weight:</span> <span class="spec-value">3,760 lbs</span></li>
+                            <li><span class="spec-label">Distribution:</span> <span class="spec-value">53/47% F/R</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 360° Engineering Showcase Section -->
+        <section id="precision-section" class="relative min-h-screen bg-surface-container-lowest flex flex-col justify-center overflow-hidden py-20">
+            <!-- Atmospheric Background Layers -->
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(29,95,168,0.1),_transparent_70%)]"></div>
+            <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent"></div>
+            <div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full">
+                <div class="text-center mb-16">
+                    <h2 class="font-display-lg text-headline-lg text-on-surface mb-4">Precision Engineering</h2>
+                    <div class="w-24 h-1 bg-primary mx-auto"></div>
+                </div>
+                <div class="relative aspect-[21/9] w-full flex items-center justify-center bg-surface-container/30 rounded-xl border border-white/5 backdrop-blur-sm overflow-hidden">
+                    <!-- 360 Placeholder Visual -->
+                    <div class="absolute inset-0 flex items-center justify-center opacity-30">
+                        <span class="material-symbols-outlined text-[120px] text-primary/50 animate-pulse">deployed_code</span>
+                    </div>
+                    <!-- Hotspots -->
+                    <div class="absolute inset-0">
+                        <!-- V8 Voodoo Engine -->
+                        <div class="absolute top-[30%] left-[45%] group cursor-pointer">
+                            <div class="w-6 h-6 rounded-full bg-primary hotspot-pulse flex items-center justify-center">
+                                <div class="w-2 h-2 bg-on-primary rounded-full"></div>
+                            </div>
+                            <div class="absolute top-8 left-1/2 -translate-x-1/2 w-48 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                                <div class="glass-layer p-4 rounded-lg">
+                                    <span class="block font-label-caps text-primary mb-1">Engine</span>
+                                    <p class="text-[12px] font-body-md text-on-surface">5.2L Voodoo Flat Plane Crank V8</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Brembo Brakes -->
+                        <div class="absolute top-[65%] left-[25%] group cursor-pointer">
+                            <div class="w-6 h-6 rounded-full bg-primary hotspot-pulse flex items-center justify-center">
+                                <div class="w-2 h-2 bg-on-primary rounded-full"></div>
+                            </div>
+                            <div class="absolute top-8 left-1/2 -translate-x-1/2 w-48 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                                <div class="glass-layer p-4 rounded-lg">
+                                    <span class="block font-label-caps text-primary mb-1">Braking</span>
+                                    <p class="text-[12px] font-body-md text-on-surface">6-Piston Brembo™ Front Calipers</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Carbon Fiber Wheels -->
+                        <div class="absolute top-[70%] left-[70%] group cursor-pointer">
+                            <div class="w-6 h-6 rounded-full bg-primary hotspot-pulse flex items-center justify-center">
+                                <div class="w-2 h-2 bg-on-primary rounded-full"></div>
+                            </div>
+                            <div class="absolute top-8 left-1/2 -translate-x-1/2 w-48 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                                <div class="glass-layer p-4 rounded-lg">
+                                    <span class="block font-label-caps text-primary mb-1">Wheels</span>
+                                    <p class="text-[12px] font-body-md text-on-surface">19" Exposed Carbon Fiber Rims</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- UI Interaction Hint -->
+                    <div class="absolute bottom-6 flex items-center gap-2 px-4 py-2 bg-black/40 backdrop-blur-md rounded-full border border-white/10">
+                        <span class="material-symbols-outlined text-primary text-sm">360</span>
+                        <span class="font-label-caps text-[10px] uppercase tracking-widest text-on-surface-variant">Click and drag to rotate</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Track Section (Stage 3 Scroll Pinning & Canvas Animation) -->
+        <section id="track-section" class="scroll-section">
+            <div class="sticky-container">
+                <canvas id="track-canvas"></canvas>
+
+                <!-- Text Overlays mapping to scroll checkpoints -->
+                <div class="text-overlays">
+                    <div id="track-text-1" class="text-overlay">
+                        <span class="category">TRACK DOMINANCE</span>
+                        <h1>BORN ON THE ASPHALT</h1>
+                        <p>Engineered to dominate the curves and excel on the straightaways. Track-tested to limits that exceed expectations.</p>
+                    </div>
+
+                    <div id="track-text-2" class="text-overlay">
+                        <span class="category">LIGHTWEIGHT AGILITY</span>
+                        <h1>CARBON CONSTRUCT</h1>
+                        <p>A lightweight design philosophy utilizing advanced carbon composites to maximize power-to-weight ratio and response.</p>
+                    </div>
+
+                    <div id="track-text-3" class="text-overlay">
+                        <span class="category">EXHAUST NOTE</span>
+                        <h1>VOODOO ACCOMPANIMENT</h1>
+                        <p>The signature growl of the 5.2L Voodoo flat-plane V8 engine, generating a visceral roar that commands attention.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cockpit Technology Section -->
+        <section id="cockpit-section" class="relative py-section-gap bg-background overflow-hidden">
+            <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-section-gap items-center">
+                    <div class="order-2 lg:order-1 relative">
+                        <div class="glass-layer rounded-xl overflow-hidden shadow-2xl relative">
+                            <img alt="Shelby GT350 high-tech dashboard detail" class="w-full aspect-square object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZJ87OCosyQOAGPoRM7CVd9NCsF4zPuiMwjMoQ0gNiNPxzM2NbK_tHTJX_ZTDCH9HFb33A0oWG26gqo3F8d62ftG0Jge4BJR-_inrPh15kppoX98iD1wU-gHWuPrcnUwy_oMmQE8E8Xx8snS90YftFShUS84vVHeAXx2UVzPp9bRmuD2JMmIfpCuk1Lws4PBdQAEyk8_s4iDC9YAulslslUf5-6p2kD24lrn3E8eHhV96aEFlD0pw"/>
+                            <div class="absolute inset-0 bg-gradient-to-tr from-background/80 via-transparent to-transparent"></div>
+                        </div>
+                        <!-- Floating Accent -->
+                        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-primary/10 blur-3xl rounded-full"></div>
+                    </div>
+                    <div class="order-1 lg:order-2 space-y-12">
+                        <div class="space-y-4">
+                            <h2 class="font-display-lg text-headline-lg text-on-surface">The Driver's Sanctuary</h2>
+                            <p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+                                Every interface is optimized for high-speed engagement, merging tactical precision with refined luxury.
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <!-- Tech Card 1 -->
+                            <div class="glass-layer p-6 rounded-lg group hover:border-primary/50 transition-colors">
+                                <span class="material-symbols-outlined text-primary mb-4 block">waves</span>
+                                <h4 class="font-title-md text-[18px] text-on-surface mb-2">MagneRide®</h4>
+                                <p class="font-body-md text-sm text-on-surface-variant">Adaptive damping system adjusts 1,000 times per second.</p>
+                            </div>
+                            <!-- Tech Card 2 -->
+                            <div class="glass-layer p-6 rounded-lg group hover:border-primary/50 transition-colors">
+                                <span class="material-symbols-outlined text-primary mb-4 block">analytics</span>
+                                <h4 class="font-title-md text-[18px] text-on-surface mb-2">Track Apps™</h4>
+                                <p class="font-body-md text-sm text-on-surface-variant">Real-time performance metrics on the 4.2" cluster display.</p>
+                            </div>
+                            <!-- Tech Card 3 -->
+                            <div class="glass-layer p-6 rounded-lg group hover:border-primary/50 transition-colors sm:col-span-2">
+                                <div class="flex items-start gap-4">
+                                    <span class="material-symbols-outlined text-primary">chair_alt</span>
+                                    <div>
+                                        <h4 class="font-title-md text-[18px] text-on-surface mb-2">RECARO® Performance</h4>
+                                        <p class="font-body-md text-sm text-on-surface-variant">Miko® Suede-trimmed seats designed for ultimate lateral support during cornering.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer from code.html -->
+    <footer class="w-full py-20 bg-surface-container-lowest border-t border-white/5 z-40 relative">
+        <div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter px-6">
+            <div class="col-span-1 md:col-span-2">
+                <h3 class="font-display-lg text-headline-lg text-on-surface opacity-20 mb-8">SHELBY GT350</h3>
+                <p class="font-label-caps text-label-caps text-on-surface-variant max-w-sm">
+                    © 2024 FORD MOTOR COMPANY. SHELBY® AND GT350® ARE REGISTERED TRADEMARKS.
+                </p>
+            </div>
+            <div class="flex flex-col gap-4">
+                <span class="font-label-caps text-label-caps text-secondary uppercase mb-2">Explore</span>
+                <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#hero-section">Overview</a>
+                <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#down-section">Aerodynamics</a>
+                <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#precision-section">Technology</a>
+            </div>
+            <div class="flex flex-col gap-4">
+                <span class="font-label-caps text-label-caps text-secondary uppercase mb-2">Legal</span>
+                <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+                <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Legal Notices</a>
+                <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Cookie Settings</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript File -->
+    <script src="main.js"></script>
+</body>
+</html>
